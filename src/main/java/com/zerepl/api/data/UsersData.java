@@ -11,12 +11,12 @@ public class UsersData implements UserRepository{
         private final Map USERS_STORE = new ConcurrentHashMap();
 
         @Override
-        public String create(User newUser) {
+        public String createUser(User newUser) {
             String id = UUID.randomUUID().toString();
             User user = new User();
 
             user.setId(id);
-            user.setLogin(newUser.getLogin());
+            user.setName(newUser.getName());
             user.setPassword(newUser.getPassword());
 
             USERS_STORE.put(id, user);
@@ -28,8 +28,19 @@ public class UsersData implements UserRepository{
         User user = new User();
 
         Object requiredUser = USERS_STORE.get(id);
-        user = User.class.cast(requiredUser);
+        user = (User) requiredUser;
+
         return user;
+    }
+
+    @Override
+    public void deleteUser(String id) {
+        USERS_STORE.remove(id);
+    }
+
+    @Override
+    public void updateUser(User newUser) {
+        USERS_STORE.replace(newUser.getId(), newUser);
     }
 
 

@@ -10,12 +10,19 @@ public class UserService {
         this.userRepository = userRepository;
     }
 
-    public String create(User user) {
-        return userRepository.create(user);
+    public String createUser(User user) {
+        return userRepository.createUser(user);
     }
 
     public User getUser(String id) {
         return userRepository.getUser(id);
     }
 
+    public void deleteUser(String id) {
+        userRepository.deleteUser(id);
+    }
+
+    public void updateUser(User user) {
+        userRepository.updateUser(user);
+    }
 }
